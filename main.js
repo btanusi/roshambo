@@ -54,10 +54,11 @@ class Game{
         } else {
             winner = `Computer wins.`
         }
-        return `Playing a game of Roshambo against the computer.\nPlayer plays ${this.playerPlayStr}!\nComputer plays ${this.computerPlayStr}!\n~${winner}~`
+        console.log(`Playing a game of Roshambo against the computer.\nPlayer plays ${this.playerPlayStr}!\nComputer plays ${this.computerPlayStr}!\n~${winner}~`)
     }
 }
 
-var playerPlay = process.argv[2].substring(7)
+const { argv } = require('yargs')
+var playerPlay = argv.move
 var myGame = new Game(playerPlay)
-console.log(myGame.compete())
+myGame.compete()
