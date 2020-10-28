@@ -1,64 +1,65 @@
+const { argv } = require('yargs')
+
 class Rock{
-    static beats(){
-        return Scissors
+    type(){
+        return 'Rock'
+    }
+    beats(){
+        return 'Scissors'
     }
 }
 
 class Paper{
-    static beats(){
-        return Rock
+    type(){
+        return 'Paper'
+    }
+    beats(){
+        return 'Rock'
     }
 }
 
 class Scissors{
-    static beats(){
-        return Paper
+    type(){
+        return 'Scissors'
+    }
+    beats(){
+        return 'Paper'
     }
 }
 
 class Game{
-    constructor(playerPlay){
-        this.playerPlayStr = playerPlay
-        this.playerPlay = this.type(playerPlay)
-        this.computerPlayStr = this.randomizedComputerPlay()
-        this.computerPlay = this.type(this.computerPlayStr)
-    }
-
-    randomizedComputerPlay(){
-        var randomPlay = Math.ceil(Math.random()*3);
-        if (randomPlay === 1){
-            return this.computerPlayStr = 'rock'
-        } else if (randomPlay === 2){
-            return this.computerPlayStr = 'paper'
+    constructor(playerMove){
+        if (playerMove === 'rock'){
+            this.playerMove = new Rock
+        } else if (playerMove === 'paper'){
+            this.playerMove = new Paper 
         } else {
-            return this.computerPlayStr = 'scissors'
+            this.playerMove = new Scissors
         }
-    }
-
-    type(playStr){
-        if (playStr === 'rock'){
-            return Rock
-        } else if (playStr === 'paper'){
-            return Paper 
+        var randomMove = Math.ceil(Math.random()*3);
+        if (randomMove === 1){
+            this.computerMove = new Rock
+        } else if (randomMove === 2){
+            this.computerMove = new Paper
         } else {
-            return Scissors
+            this.computerMove = new Scissors
         }
     }
 
     compete(){
         var winner = '';
-        if (this.playerPlay === this.computerPlay){
+        var playerMove = this.playerMove.type();
+        var computerMove = this.computerMove.type();
+        if ( playerMove === computerMove ){
             winner = 'Player and Computer tie.'
-        } else if (this.playerPlay.beats() === this.computerPlay){
+        } else if (this.playerMove.beats() === computerMove){
             winner = `Player wins.`
         } else {
             winner = `Computer wins.`
         }
-        console.log(`Playing a game of Roshambo against the computer.\nPlayer plays ${this.playerPlayStr}!\nComputer plays ${this.computerPlayStr}!\n~${winner}~`)
+        console.log(`Playing a game of Roshambo against the computer.\nPlayer plays ${playerMove}!\nComputer plays ${computerMove}!\n~${winner}~`)
     }
 }
 
-const { argv } = require('yargs')
-var playerPlay = argv.move
-var myGame = new Game(playerPlay)
+var myGame = new Game(argv.move)
 myGame.compete()
