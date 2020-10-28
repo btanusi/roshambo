@@ -1,41 +1,41 @@
 const { argv } = require('yargs')
 
-class Rock{
-    constructor(){
-        this._type = 'Rock'
+class Move {
+    constructor(type){
+        this._type = type;
     }
-
     get type(){
         return this._type;
     }
-    beats(){
-        return 'Scissors'
+    beats(move){
+        return move;
     }
 }
 
-class Paper{
+class Rock extends Move{
     constructor(){
-        this._type = 'Paper'
-    }
-
-    get type(){
-        return this._type;
+        super('Rock')
     }
     beats(){
-        return 'Rock'
+        return super.beats('Scissors')
     }
 }
 
-class Scissors{
+class Paper extends Move{
     constructor(){
-        this._type = 'Scissors'
-    }
-    
-    get type(){
-        return this._type;
+        super('Paper')
     }
     beats(){
-        return 'Paper'
+        return super.beats('Rock')
+    }
+}
+
+class Scissors extends Move{
+    constructor(){
+        super('Scissors')
+    }
+    beats(){
+        return super.beats('Paper')
     }
 }
 
@@ -60,8 +60,8 @@ class Game{
 
     compete(){
         var winner = '';
-        var playerMove = this.playerMove.type();
-        var computerMove = this.computerMove.type();
+        var playerMove = this.playerMove.type;
+        var computerMove = this.computerMove.type;
         if ( playerMove === computerMove ){
             winner = 'Player and Computer tie.'
         } else if (this.playerMove.beats() === computerMove){
