@@ -1,8 +1,12 @@
 const { argv } = require('yargs')
 
 class Rock{
-    type(){
-        return 'Rock'
+    constructor(){
+        this._type = 'Rock'
+    }
+
+    get type(){
+        return this._type;
     }
     beats(){
         return 'Scissors'
@@ -10,8 +14,12 @@ class Rock{
 }
 
 class Paper{
-    type(){
-        return 'Paper'
+    constructor(){
+        this._type = 'Paper'
+    }
+
+    get type(){
+        return this._type;
     }
     beats(){
         return 'Rock'
@@ -19,8 +27,12 @@ class Paper{
 }
 
 class Scissors{
-    type(){
-        return 'Scissors'
+    constructor(){
+        this._type = 'Scissors'
+    }
+    
+    get type(){
+        return this._type;
     }
     beats(){
         return 'Paper'
